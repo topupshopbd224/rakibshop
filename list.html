@@ -42,6 +42,39 @@
       margin: 10px 0;
       box-sizing: border-box;
     }
+    
+    .number-copy {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .number-copy input {
+      font-size: 18px;
+      text-align: center;
+      border: none;
+      background: #e9ecef;
+      padding: 10px;
+      border-radius: 8px;
+      width: 200px;
+      margin-right: 10px;
+    }
+
+    .number-copy button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .number-copy button:hover {
+      background-color: #0056b3;
+    }
 
     button {
       background-color: #28a745;
@@ -121,8 +154,16 @@
       <option value="weeklylite">Weekly Lite - 40 Tk</option>
       <option value="monthly">Monthly - 750 Tk</option>
     </select>
-
+<!-- Nagad Number -->
+    <div class="number-copy">
+      <input type="text" id="nagad-number" value="01618594024" readonly>
+      <button onclick="copyNumber()">Copy</button>
+    </div>
+    <p class="info">Nagad</p>
+  </div>
+  
     <!-- Enter Last 2 Digits -->
+    
     <h2>👇টাকা পাঠানোর লাস্ট ২ ডিজিট এখানে দিন </h2>
     <input type="text" id="last-digits" placeholder="Last 2 Digits">
     <p class="info">যেই নম্বর থেকে টাকা পাঠিয়েছেন, সেই নম্বরের লাস্ট ২ডিজিট বসান </p>
@@ -152,6 +193,16 @@
   </footer>
 
   <script>
+  
+  function copyNumber() {
+      const nagadNumber = document.getElementById('nagad-number');
+      nagadNumber.select();
+      nagadNumber.setSelectionRange(0, 99999); // For mobile devices
+      navigator.clipboard.writeText(nagadNumber.value);
+      alert('Nagad number copied: ' + nagadNumber.value);
+    }
+    
+    
     document.addEventListener('DOMContentLoaded', () => {
       const diamondSelect = document.getElementById('diamond-packages');
       const membershipSelect = document.getElementById('membership-packages');
@@ -221,3 +272,7 @@
   </script>
 </body>
 </html>
+
+<!--মেম্বারশিপ এর নিচে দিকে থাকবে নম্বর কপির অপশন আমার নাম : 01618594024
+
+নম্বর এর উপরে লেখা থাকবে "Nagad"-->
