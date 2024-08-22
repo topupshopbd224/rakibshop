@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Form</title>
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e2e6ea);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    h1, h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    select, input {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: calc(100% - 24px);
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: calc(100% - 24px);
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .info, .error {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .info {
+      color: #666;
+    }
+
+    .error {
+      color: #dc3545;
+    }
+
+    .rules {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 20px;
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Payment and Package Selection</h1>
+
+    <!-- Diamond Packages -->
+    <h2>Diamond Packages</h2>
+    <select id="diamond-packages">
+      <option value="">Select a Diamond Package</option>
+      <option value="25">25 Diamonds - 24 Tk</option>
+      <option value="50">50 Diamonds - 40 Tk</option>
+      <option value="115">115 Diamonds - 80 Tk</option>
+      <option value="240">240 Diamonds - 150 Tk</option>
+      <option value="355">355 Diamonds - 230 Tk</option>
+      <option value="480">480 Diamonds - 300 Tk</option>
+      <option value="610">610 Diamonds - 370 Tk</option>
+      <option value="850">850 Diamonds - 520 Tk</option>
+      <option value="1090">1090 Diamonds - 665 Tk</option>
+      <option value="1240">1240 Diamonds - 730 Tk</option>
+    </select>
+
+    <!-- Membership Packages -->
+    <h2>Membership Packages</h2>
+    <select id="membership-packages">
+      <option value="">Select a Membership Package</option>
+      <option value="levelup">Level Up Pass - 160 Tk</option>
+      <option value="weekly">Weekly - 150 Tk</option>
+      <option value="weeklylite">Weekly Lite - 40 Tk</option>
+      <option value="monthly">Monthly - 750 Tk</option>
+    </select>
+
+    <!-- Enter Last 2 Digits -->
+    <h2>👇টাকা পাঠানোর লাস্ট ২ ডিজিট এখানে দিন </h2>
+    <input type="text" id="last-digits" placeholder="Last 2 Digits">
+    <p class="info">যেই নম্বর থেকে টাকা পাঠিয়েছেন, সেই নম্বরের লাস্ট ২ডিজিট বসান </p>
+
+    <!-- Payment Amount -->
+    <h2>কতো টাকা পাঠিয়েছেন তা বসান</h2>
+    <input type="number" id="payment-amount" placeholder="Amount">
+
+    <!-- Error Message -->
+    <p id="error-message" class="error"></p>
+
+    <!-- Send Button -->
+    <button id="send-button" disabled>Send</button>
+
+    <!-- Top-up Rules -->
+    <div class="rules">
+      <h2>Top-up Rules</h2>
+         <p>১. পাঠানোর আগে একটি প্যাকেজ নির্বাচন করুন।</p>
+    <p>২. সঠিকভাবে আপনার টাকা পাঠানো ফোন নম্বরের শেষ ২ ডিজিট প্রবেশ করুন।</p>
+    <p>৩. সঠিক পরিমাণ পেমেন্ট প্রদান করুন।</p>
+    <p>৪. যেকোনো সমস্যা হলে গ্রাহক সহায়তার সাথে যোগাযোগ করুন </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>©opyright by Rakib YT</p>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const diamondSelect = document.getElementById('diamond-packages');
+      const membershipSelect = document.getElementById('membership-packages');
+      const lastDigitsInput = document.getElementById('last-digits');
+      const paymentAmountInput = document.getElementById('payment-amount');
+      const sendButton = document.getElementById('send-button');
+      const errorMessage = document.getElementById('error-message');
+
+      function updateButtonState() {
+        const hasDiamond = diamondSelect.value !== '';
+        const hasMembership = membershipSelect.value !== '';
+        const lastDigits = lastDigitsInput.value.length === 2;
+        const paymentAmount = paymentAmountInput.value.trim() !== '';
+
+        if (hasDiamond || hasMembership) {
+          sendButton.disabled = !lastDigits || !paymentAmount;
+        } else {
+          sendButton.disabled = true;
+        }
+      }
+
+      function validateInput() {
+        if (diamondSelect.value === '' && membershipSelect.value === '') {
+          errorMessage.textContent = 'Please select a package.';
+          sendButton.disabled = true;
+        } else if (lastDigitsInput.value.length !== 2) {
+          errorMessage.textContent = 'Please enter the last 2 digits of your phone number.';
+          sendButton.disabled = true;
+        } else if (paymentAmountInput.value.trim() === '') {
+          errorMessage.textContent = 'Please enter the payment amount.';
+          sendButton.disabled = true;
+        } else {
+          errorMessage.textContent = '';
+        }
+      }
+
+      diamondSelect.addEventListener('change', () => {
+        updateButtonState();
+        validateInput();
+      });
+      membershipSelect.addEventListener('change', () => {
+        updateButtonState();
+        validateInput();
+      });
+      lastDigitsInput.addEventListener('input', () => {
+        updateButtonState();
+        validateInput();
+      });
+      paymentAmountInput.addEventListener('input', () => {
+        updateButtonState();
+        validateInput();
+      });
+
+      sendButton.addEventListener('click', () => {
+        const diamondPackage = diamondSelect.value;
+        const membershipPackage = membershipSelect.value;
+        const lastDigits = lastDigitsInput.value;
+        const paymentAmount = paymentAmountInput.value;
+
+        const message = `Diamond Package: ${diamondPackage}\nMembership Package: ${membershipPackage}\nLast 2 Digits: ${lastDigits}\nPayment Amount: ${paymentAmount} Tk`;
+        const phoneNumber = '+8801332354191';
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        window.location.href = whatsappUrl;
+      });
+    });
+  </script>
+</body>
+</html>
