@@ -6,123 +6,81 @@
   <title>Payment Form</title>
   <link rel="stylesheet" href="./styles.css">
   <style>
+    /* CSS কোড নিচে দেয়া হলো */
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f8f9fa, #e2e6ea);
+      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
     }
 
     .container {
-      width: 90%;
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 30px;
-      background: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h1, h2 {
+    h1, h2, h3 {
+      text-align: center;
       color: #333;
-      text-align: center;
-      margin-bottom: 20px;
     }
 
-    select, input {
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      width: calc(100% - 24px);
-      margin: 10px 0;
-      box-sizing: border-box;
-    }
-    
-    .number-copy {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .number-copy input {
-      font-size: 18px;
-      text-align: center;
-      border: none;
-      background: #e9ecef;
+    select, input[type="text"], input[type="number"] {
+      width: calc(100% - 20px);
       padding: 10px;
-      border-radius: 8px;
-      width: 200px;
-      margin-right: 10px;
-    }
-
-    .number-copy button {
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: #007bff;
-      color: white;
-      transition: background-color 0.3s ease;
-    }
-
-    .number-copy button:hover {
-      background-color: #0056b3;
-    }
-
-    button {
-      background-color: #28a745;
-      color: white;
-      padding: 15px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      width: calc(100% - 24px);
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #218838;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .info, .error {
-      font-size: 14px;
       text-align: center;
-      margin-top: 10px;
-    }
-
-    .info {
-      color: #666;
-    }
-
-    .error {
-      color: #dc3545;
+      font-size: 14px;
+      color: #f00;
     }
 
     .rules {
       margin-top: 20px;
-      font-size: 14px;
-      color: #333;
-      line-height: 1.6;
+      background-color: #e7f1ff;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: left;
     }
 
-    footer {
-      margin-top: auto;
-      padding: 20px;
-      background-color: black;
-      color: white;
-      text-align: center;
-      font-size: 18px;
-      width: 100%;
+    .rules p {
+      margin: 5px 0;
+      color: #333;
     }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+   footer {
+  text-align: center;
+  padding: 20px 0;
+  background-color: black;
+  color: white;
+}
+
   </style>
 </head>
 <body>
@@ -154,7 +112,11 @@
       <option value="weeklylite">Weekly Lite - 40 Tk</option>
       <option value="monthly">Monthly - 750 Tk</option>
     </select>
-  
+    
+    <!-- Free Fire UID -->
+    <h2>আপনার গেমের UID দিন</h2>
+    <input type="text" id="freefire-uid" placeholder="এখানে Uid দিন">
+
     <!-- Enter Last 2 Digits -->
     <h3>নগদ নম্বর</h3>
     <h3>এই নম্বর এ সেন্ড মানি করুন : 01618594024</h3>
@@ -175,10 +137,10 @@
     <!-- Top-up Rules -->
     <div class="rules">
       <h2>Top-up Rules</h2>
-         <p>১. পাঠানোর আগে একটি প্যাকেজ নির্বাচন করুন।</p>
-    <p>২. সঠিকভাবে আপনার টাকা পাঠানো ফোন নম্বরের শেষ ২ ডিজিট প্রবেশ করুন।</p>
-    <p>৩. সঠিক পরিমাণ পেমেন্ট প্রদান করুন।</p>
-    <p>৪. যেকোনো সমস্যা হলে গ্রাহক সহায়তার সাথে যোগাযোগ করুন </p>
+      <p>১. পাঠানোর আগে একটি প্যাকেজ নির্বাচন করুন।</p>
+      <p>২. সঠিকভাবে আপনার টাকা পাঠানো ফোন নম্বরের শেষ ২ ডিজিট প্রবেশ করুন।</p>
+      <p>৩. সঠিক পরিমাণ পেমেন্ট প্রদান করুন।</p>
+      <p>৪. যেকোনো সমস্যা হলে গ্রাহক সহায়তার সাথে যোগাযোগ করুন </p>
     </div>
   </div>
 
@@ -187,12 +149,10 @@
   </footer>
 
   <script>
-  
-    
-    
     document.addEventListener('DOMContentLoaded', () => {
       const diamondSelect = document.getElementById('diamond-packages');
       const membershipSelect = document.getElementById('membership-packages');
+      const freefireUIDInput = document.getElementById('freefire-uid');
       const lastDigitsInput = document.getElementById('last-digits');
       const paymentAmountInput = document.getElementById('payment-amount');
       const sendButton = document.getElementById('send-button');
@@ -203,9 +163,10 @@
         const hasMembership = membershipSelect.value !== '';
         const lastDigits = lastDigitsInput.value.length === 2;
         const paymentAmount = paymentAmountInput.value.trim() !== '';
+        const freefireUID = freefireUIDInput.value.trim() !== '';
 
         if (hasDiamond || hasMembership) {
-          sendButton.disabled = !lastDigits || !paymentAmount;
+          sendButton.disabled = !lastDigits || !paymentAmount || !freefireUID;
         } else {
           sendButton.disabled = true;
         }
@@ -221,6 +182,9 @@
         } else if (paymentAmountInput.value.trim() === '') {
           errorMessage.textContent = 'Please enter the payment amount.';
           sendButton.disabled = true;
+        } else if (freefireUIDInput.value.trim() === '') {
+          errorMessage.textContent = 'Please enter your Free Fire UID.';
+          sendButton.disabled = true;
         } else {
           errorMessage.textContent = '';
         }
@@ -231,6 +195,10 @@
         validateInput();
       });
       membershipSelect.addEventListener('change', () => {
+        updateButtonState();
+        validateInput();
+      });
+      freefireUIDInput.addEventListener('input', () => {
         updateButtonState();
         validateInput();
       });
@@ -246,10 +214,11 @@
       sendButton.addEventListener('click', () => {
         const diamondPackage = diamondSelect.value;
         const membershipPackage = membershipSelect.value;
+        const freefireUID = freefireUIDInput.value;
         const lastDigits = lastDigitsInput.value;
         const paymentAmount = paymentAmountInput.value;
 
-        const message = `Diamond Package: ${diamondPackage}\nMembership Package: ${membershipPackage}\nLast 2 Digits: ${lastDigits}\nPayment Amount: ${paymentAmount} Tk`;
+        const message = `Diamond Package: ${diamondPackage}\nMembership Package: ${membershipPackage}\nFree Fire UID: ${freefireUID}\nLast 2 Digits: ${lastDigits}\nPayment Amount: ${paymentAmount} Tk`;
         const phoneNumber = '+8801332354191';
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         
