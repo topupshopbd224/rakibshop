@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Video Carousel</title>
+    <style>
+        /* CSS Code */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .carousel {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            position: relative;
+        }
+
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            pointer-events: none; /* Disable mouse events for the video */
+        }
+
+    </style>
+</head>
+<body>
+    <!-- HTML Code -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item">
+                <video id="video1" autoplay>
+                    <source src="./video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div  class="carousel-item">
+                <video id="video2">
+                    <source src="./video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="carousel-item">
+                <video id="video3">
+                    <source src="./video3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+                 <div class="carousel-item">
+       <video id="video3">
+         <source src="./video4.mp4" type="video/mp4">
+         Your browser does not support the video tag.
+       </video>
+     </div>
+     
+     
+     <div class="carousel-item">
+                <video id="video3">
+                    <source src="./video5.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            
+            <div class="carousel-item">
+                <video id="video3">
+                    <source src="./video6.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+           
+            <!-- Add more video items as needed -->
+        </div>
+    </div>
+
+    <script>
+        // JavaScript Code
+        let startY;
+        let currentIndex = 0;
+        let isDragging = false;
+
+        function showSlide(index) {
+            const slides = document.querySelector('.carousel-inner');
+            const totalSlides = document.querySelectorAll('.carousel-item').length;
+            if (index >= totalSlides) return; // Prevent going beyond the last slide
+            else if (index < 0) return; // Prevent going before the first slide
+            currentIndex = index;
+            slides.style.transform = `translateY(-${currentIndex * 100}%)`;
+
+            // Pause previous video and play the current one with sound
+            const videos = document.querySelectorAll('video');
+            videos.forEach((video, idx) => {
+                if (idx !== currentIndex) {
+                    video.pause();
+                } else {
+                    video.play();
+                    video.muted = false; // Ensure sound is on
+                }
+            });
+        }
+
+        // Handle touch events
+        const carousel = document.querySelector('.carousel');
+        
+        carousel.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        });
+
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const currentY = e.touches[0].clientY;
+            const diffY = startY - currentY;
+            
+            if (Math.abs(diffY) > 30) {
+                if (diffY > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                isDragging = false;
+            }
+        });
+
+        carousel.addEventListener('touchend', () => {
+            isDragging = false;
+        });
+
+        function nextSlide() {
+            showSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentIndex - 1);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ensure the initial video is playing with sound on
+            const firstVideo = document.querySelector('video');
+            firstVideo.muted = false; // Sound should be on
+            firstVideo.play();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Switches with Sound</title>
+    <style>
+        /* CSS Code */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: auto;
+            background-image: url('bg.png'); /* Background image */
+            background-size: cover; /* Make the background image cover the whole screen */
+            background-position: center; /* Center the background image */
+        }
+
+        .box {
+            width: 260px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            padding: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            border-radius: 10px;
+            position: relative; /* Added for positioning the send button */
+        }
+
+        .toggle-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .toggle-container {
+            width: 60px;
+            height: 30px;
+            background-color: red; /* Default color (off) */
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .toggle-circle {
+            width: 26px;
+            height: 26px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: left 0.3s;
+        }
+
+        .toggle-container.active {
+            background-color: green; /* Color when on */
+        }
+
+        .toggle-container.active .toggle-circle {
+            left: 32px;
+        }
+
+        .button-label {
+            color: white;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .send-button {
+            width: 100px;
+            height: 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            line-height: 40px;
+            position: absolute;
+            bottom: 0; /* Aligns the button to the very bottom of the box */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .send-button.disabled {
+            background-color: #6c757d; /* Gray color for disabled button */
+            cursor: not-allowed;
+        }
+
+        .send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML Code -->
+    <div class="box">
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Happiness</div>
+        </div>
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Optimism</div>
+        </div>
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Kindness</div>
+        </div>
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Giving</div>
+        </div>
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Recpect</div>
+        </div>
+        <div class="toggle-item">
+            <div class="toggle-container" onclick="toggleSwitch(this)">
+                <div class="toggle-circle"></div>
+            </div>
+            <div class="button-label">Eggo</div>
+        </div>
+        <button class="send-button" onclick="openPage()" id="sendButton">Send</button>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="soundOn" src="sound-on.mp3"></audio>
+    <audio id="soundOff" src="sound-off.mp3"></audio>
+    <audio id="clickSound" src="click-sound.mp3"></audio>
+
+    <script>
+        // JavaScript Code
+        function toggleSwitch(element) {
+            playSound('clickSound'); // Play click sound
+
+            const allToggles = document.querySelectorAll('.toggle-container');
+            const isLastButton = element === allToggles[allToggles.length - 1];
+            const lastButtonActive = allToggles[allToggles.length - 1].classList.contains('active');
+            const activeCount = Array.from(allToggles).filter(toggle => toggle.classList.contains('active')).length;
+
+            if (isLastButton) {
+                // If the last button is clicked, deactivate all other buttons
+                allToggles.forEach(toggle => {
+                    if (toggle !== element) {
+                        toggle.classList.remove('active');
+                        playSound('soundOff');
+                    }
+                });
+                const wasActive = element.classList.contains('active');
+                element.classList.toggle('active');
+                playSound(wasActive ? 'soundOff' : 'soundOn');
+            } else {
+                // If any other button is clicked
+                if (element.classList.contains('active')) {
+                    element.classList.remove('active');
+                    playSound('soundOff');
+                } else {
+                    if (!lastButtonActive) {
+                        element.classList.add('active');
+                        playSound('soundOn');
+                    }
+                }
+            }
+
+            // Ensure only the last button can disable others
+            if (lastButtonActive) {
+                allToggles.forEach(toggle => {
+                    if (toggle !== allToggles[allToggles.length - 1]) {
+                        toggle.classList.add('disabled');
+                        navigator.vibrate([100, 50, 100]); // Vibration pattern
+                    }
+                });
+                document.getElementById('sendButton').classList.add('disabled');
+            } else {
+                allToggles.forEach(toggle => {
+                    toggle.classList.remove('disabled');
+                });
+                document.getElementById('sendButton').classList.remove('disabled');
+            }
+
+            // Disable send button if less than 5 buttons are active
+            document.getElementById('sendButton').classList.toggle('disabled', activeCount < 5);
+        }
+
+        function playSound(soundId) {
+            const sound = document.getElementById(soundId);
+            sound.play();
+        }
+
+        function openPage() {
+            // Check if at least 5 buttons are active before opening the page
+            const activeCount = Array.from(document.querySelectorAll('.toggle-container')).filter(toggle => toggle.classList.contains('active')).length;
+            if (activeCount >= 5) {
+                window.open('video.html', '_blank'); // Opens a new HTML page in a new tab
+            }
+        }
+    </script>
+</body>
+</html>
