@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Apk Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .app-container {
+            background-color: lightblue;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .app-name {
+            font-size: 24px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .app-image {
+            width: 120px; /* ছবির আকার */
+            height: 120px; /* ছবির আকার */
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .download-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Premium Apk Download</h1>
+
+    <!-- App 1 -->
+    <div class="app-container">
+        <img src="img1.png" alt="img" class="app-image">
+        <div class="app-name">Termux</div>
+        <a href="#" class="download-button" onclick="downloadFile('https://www.mediafire.com/file/hj3op7ms88peiui/termux.apk/file')">Download</a>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        &copy; 2024 Rakib YT
+    </div>
+
+    <script>
+        function downloadFile(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>

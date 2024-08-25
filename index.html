@@ -72,15 +72,44 @@
       }
 
       footer {
-        padding: 40px; /* Increased padding for larger footer */
+        padding: 40px;
         background-color: black;
         color: white;
         text-align: center;
-        font-size: 18px; /* Increased font size for better visibility */
+        font-size: 18px;
         width: 100%;
         box-sizing: border-box;
         position: relative;
-        margin-top: auto; /* Ensure footer stays at the bottom */
+        margin-top: auto;
+      }
+
+      .new-options {
+        padding: 20px;
+        text-align: left;
+        margin: 20px auto;
+        width: 90%;
+        max-width: 600px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .new-options a {
+        font-size: 20px;
+        color: white;
+        background-color: #333;
+        padding: 10px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .new-options a:hover {
+        background-color: #555;
+      }
+
+      .right-option {
+        margin-left: auto;
       }
     </style>
   </head>
@@ -93,13 +122,19 @@
     <div id="links-div">
       <a href="./list.html" class="link-item">★ TOPUP</a>
       <a href="./mt.html" class="link-item">★ Motivational game</a>
-      <a href="./dnl.html" class="link-item">★ Premum apk download</a>
+      <a href="./dnl.html" class="link-item">★ Premium apk download</a>
       <a href="./popup.html" class="link-item">★ TIKTOK FOLLOW NOW</a>
-      <a href="./popup.html" class="link-item">★ singing group Join Request</a>
+      <a href="./popup.html" class="link-item">★ Singing group Join Request</a>
     </div>
     
     <div id="custom-text">
-      <p>আমার সাইট এ আসার জন্য আপনাকে অনেক ধন্যবাদ, দয়া করে মিথ্যা তথ্য দিবেন না,মিথ্যা তথ্য দিলে তার আর টপআপ হবে না, অযথা মেসেজ দিবেন সময় নষ্ট করবেন না। </p>
+      <p>আমাদের সাইট এ আসার জন্য আপনাকে অনেক ধন্যবাদ, দয়া করে মিথ্যা তথ্য দিবেন না, মিথ্যা তথ্য দিলে তার আর টপআপ হবে না, অযথা মেসেজ দিবেন সময় নষ্ট করবেন না। </p>
+    </div>
+    
+    <!-- New Options Section -->
+    <div class="new-options">
+      <a href="./sycho.html" onclick="checkPasswordSycho()">Go to Sycho</a>
+      <a href="./popup.html" class="right-option">User Info</a>
     </div>
     
     <footer>
@@ -107,5 +142,20 @@
         <p>©opyright by Rakib YT</p>
       </div>
     </footer>
+
+    <script>
+      function checkPasswordSycho() {
+        const password = prompt("Please enter the password for Sycho:");
+        if (password === null) {
+          // Cancel button clicked, redirect to home page
+          window.location.href = "./index.html"; // Replace with your home page URL
+        } else if (password === "4616") { // Replace with your Sycho password
+          window.location.href = "./sycho.html";
+        } else {
+          alert("Incorrect password! Please try again.");
+          window.location.href = "./index.html"; // Redirect to home page on incorrect password
+        }
+      }
+    </script>
   </body>
 </html>
